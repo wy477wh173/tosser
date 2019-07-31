@@ -13,6 +13,8 @@ char text[]= "RMW Games";
 
 byte draw_text;
 
+
+//comument
 void setup() {
   // put your setup code here, to run once:
   ardb.begin();
