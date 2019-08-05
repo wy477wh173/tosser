@@ -9,7 +9,8 @@ Arduboy2 ardb;
 //variable init // these were used in the initial test, have since been removed
 //byte drawx;
 //byte drawy;
-//char intro[]= "RMW Games";
+const char rmw_games[]= "RMW Games";
+const char  devs[] = "Robert White,\n Michael White,\n and Wyatt White";
 
 //menu definitions
 const char play[] = "Play";
@@ -24,6 +25,7 @@ const char credit[] = "Credit";
 //define game state (0 = Menu, 1 = game, 2 = help, 3 = credit) 
 byte game_state = 0;
 byte menu_state = 1;
+const byte menu_spacer = 12;//dictates spacing of menu items
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Definitions End
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Game States
@@ -31,18 +33,18 @@ void draw_menu()
   {//this should draw a really simple menu
   //draw cursor @ 16 * menu_state
   //should draw a rounded rectangle under the current selection
-   ardb.drawRoundRect(2,16*menu_state,32,16,5);
+   ardb.drawRoundRect(2,menu_spacer*menu_state,32,menu_spacer,5);
     
    //play item // menu state 1
-    ardb.setCursor(3,16 * 1);
+    ardb.setCursor(3,menu_spacer * 1);
     ardb.write(play);
    
    //help item // menu state 2
-    ardb.setCursor(3,16 * 2);
+    ardb.setCursor(3,menu_spacer * 2);
     ardb.write(help);
 
    //credit item // menu state 3
-    ardb.setCursor(3,16 * 3);
+    ardb.setCursor(3,menu_spacer * 3);
     ardb.write(credit);
    
    //move cursor
@@ -65,7 +67,12 @@ void draw_menu()
 
 void draw_credit()
   {//this should just draw our names
-    
+    //draw RMW Games
+    ardb.setCursor(WIDTH/ 2, 0);
+    ardb.write(rmw_games);
+
+    ardb.setCursor(WIDTH/2,12);
+    ardb.write(devs);
   }
 /////////////////////////////////////////////////////////////////////////////////////////////////Game states end
 
@@ -81,12 +88,13 @@ void loop()
   {
   // put your main code here, to run repeatedly:
   ardb.clear();
+  ardb.pollButtons();//for justPressed and justReleased
   if(game_state == 0)//menu
     {draw_menu();}
   //if(game_state == 1)//menu
   //  {draw_game();}
   //if(game_state == 2)//help
-  //  {draw_menu();}
+  //  {draw_help();}
   if(game_state == 3)//credit
     {draw_credit();}
 
