@@ -73,6 +73,11 @@ void draw_credit()
 
     ardb.setCursor(WIDTH/2,12);
     ardb.write(devs);
+
+    if(ardb.justPressed(B_BUTTON))
+      {//go back to main menu
+        game_state = 0;
+      }
   }
 /////////////////////////////////////////////////////////////////////////////////////////////////Game states end
 
