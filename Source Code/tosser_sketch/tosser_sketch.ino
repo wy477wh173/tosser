@@ -49,14 +49,10 @@ void draw_menu()
    
    //move cursor
     if(ardb.justPressed(UP_BUTTON) && menu_state > 1)
-      {
-      menu_state += -1;
-      }
+      {menu_state += -1;}
 
-      if(ardb.justPressed(DOWN_BUTTON) && menu_state < 2)
-      {
-      menu_state += 1;
-      }
+      if(ardb.justPressed(DOWN_BUTTON) && menu_state < 3)
+      {menu_state += 1;}
 
     if(ardb.justPressed(A_BUTTON))
      {
