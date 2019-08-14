@@ -26,6 +26,22 @@ const char credit[] = "Credit";
 byte game_state = 0;
 byte menu_state = 1;
 const byte menu_spacer = 12;//dictates spacing of menu items
+
+//define player values
+byte player_turn = 1;
+
+//player1
+short p1_power = 0;
+short p1_angle = 0;
+byte p1_fired = 0;
+byte p1_life = 3;
+short p1_ammo = 24;
+
+short p2_power = 0;
+short p2_angle = 0;
+byte p2_fired = 0;
+byte p2_life = 3;
+short p2_ammo = 24;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Definitions End
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Game States
@@ -67,13 +83,65 @@ void draw_credit()
     ardb.setCursor(WIDTH/ 2, 0);
     ardb.write(rmw_games);
 
-    ardb.setCursor(WIDTH/2,12);
+    ardb.setCursor(1,12);
     ardb.write(devs);
 
     if(ardb.justPressed(B_BUTTON))
       {//go back to main menu
         game_state = 0;
       }
+  }
+
+
+
+
+
+void draw_game()
+  {
+    //this should be a really simple fire & fire loop
+    //
+
+    if(player_turn == 1)
+      {// first player turn
+        //aiming up and down
+        if(ardb.justPressed(UP_BUTTON))
+        {p1_angle += 1;}
+        if(ardb.justPressed(DOWN_BUTTON))
+        {p1_angle += -1}
+
+        if(ardb.justPressed(RIGHT_BUTTON) && p1_power < 10)
+        {p1_power += 1;}
+        if(ardb.justPressed(LEFT_BUTTON) && p1_power > 0)
+        {p1_power += -1;}
+
+        if(ardb.justPressed(A_BUTTON))//firing
+        {
+          //this should trigger firing thing
+        }
+      }
+
+     if(player_turn == 2)
+      {//second player turn
+        //aiming up and down
+        if(ardb.justPressed(UP_BUTTON))//maybe we want to check this per-frame? 
+        {p2_angle += 1;}
+        if(ardb.justPressed(DOWN_BUTTON))
+        {p2_angle += -1}
+
+        if(ardb.justPressed(RIGHT_BUTTON) && p2_power < 10)
+        {p2_power += 1;}
+        if(ardb.justPressed(LEFT_BUTTON) && p2_power > 0)
+        {p2_power += -1;}
+
+        if(ardb.justPressed(A_BUTTON))//firing
+        {
+          //this should trigger firing thing
+        }
+      }
+
+    //we should draw both players and their shots down here.
+    //. . . . somehow
+     
   }
 /////////////////////////////////////////////////////////////////////////////////////////////////Game states end
 
