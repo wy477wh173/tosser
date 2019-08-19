@@ -5,7 +5,6 @@
 //importing arduboy libraries
 #include <Arduboy2.h>
 Arduboy2 ardb;
-//Arduboy2 arduboy;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Definitions
 //variable init // these were used in the initial test, have since been removed
 //byte drawx;
@@ -125,7 +124,7 @@ void draw_credit()
   ardb.setCursor(WIDTH / 2, 0);
   ardb.write(rmw_games);
 
-  ardb.setCursor(1, 12);
+  ardb.setCursor(0, 12);
   ardb.write(devs);
 
   if (ardb.justPressed(B_BUTTON))
@@ -141,65 +140,6 @@ void draw_credit()
 void draw_game()
 {
   //this should be a really simple fire & fire loop
-  //
-
-  /*if (player_turn == 1)
-  { // first player turn
-    //aiming up and down
-    if (ardb.justPressed(UP_BUTTON))
-    {
-      p1_angle += 1;
-    }
-    if (ardb.justPressed(DOWN_BUTTON))
-    {
-      p1_angle += -1;
-    }
-
-    if (ardb.justPressed(RIGHT_BUTTON) && p1_power < 10)
-    {
-      p1_power += 1;
-    }
-    if (ardb.justPressed(LEFT_BUTTON) && p1_power > 0)
-    {
-      p1_power += -1;
-    }
-
-    if (ardb.justPressed(A_BUTTON)) //firing
-    {
-      //this should trigger firing thing
-    }
-  }
-
-  if (player_turn == 2)
-  { //second player turn
-    //aiming up and down
-    if (ardb.justPressed(UP_BUTTON)) //maybe we want to check this per-frame?
-    {
-      p2_angle += 1;
-    }
-    if (ardb.justPressed(DOWN_BUTTON))
-    {
-      p2_angle += -1;
-    }
-
-    if (ardb.justPressed(RIGHT_BUTTON) && p2_power < 10)
-    {
-      p2_power += 1;
-    }
-    if (ardb.justPressed(LEFT_BUTTON) && p2_power > 0)
-    {
-      p2_power += -1;
-    }
-
-    if (ardb.justPressed(A_BUTTON)) //firing
-    {
-      //this should trigger firing thing
-    }
-  }
-
-  //we should draw both players and their shots down here.
-  //. . . . somehow
-*/
   //ardb.pollButtons();
   //set angle
   if (ardb.justPressed(DOWN_BUTTON))
