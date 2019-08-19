@@ -5,7 +5,7 @@
 //importing arduboy libraries
 #include <Arduboy2.h>
 Arduboy2 ardb;
-Arduboy2 arduboy;
+//Arduboy2 arduboy;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Definitions
 //variable init // these were used in the initial test, have since been removed
 //byte drawx;
@@ -52,7 +52,7 @@ const byte menu_spacer = 12;//dictates spacing of menu items
 //define player values
 byte player_turn = 1;
 
-//player1
+/*player1
 short p1_power = 0;
 short p1_angle = 0;
 byte p1_fired = 0;
@@ -64,16 +64,16 @@ short p2_angle = 0;
 byte p2_fired = 0;
 byte p2_life = 3;
 short p2_ammo = 24;
-
-int angleA = 0;
-int angleB = 0;
-int powerA = 0;
-int powerB = 0;
-int wind = 0;
-int locationX;
-int locationY;
-int powersX;
-int powesY;
+*/
+byte angleA = 0;
+byte angleB = 0;
+byte powerA = 0;
+byte powerB = 0;
+byte wind = 0;
+byte locationX;
+byte locationY;
+byte powersX;
+byte powesY;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////Definitions End
 
@@ -83,7 +83,7 @@ void draw_menu()
   //draw cursor @ 16 * menu_state
   //should draw a rounded rectangle under the current selection
 
-  ardb.drawRoundRect(2, 16 * menu_state - 1, 32, 16, 5);
+  //ardb.drawRoundRect(2, 16 * menu_state - 1, 32, 16, 5);
 
   ardb.drawRoundRect(2, menu_spacer * menu_state, 32, menu_spacer, 5);
 
@@ -101,17 +101,6 @@ void draw_menu()
   ardb.write(credit);
 
   //move cursor
-
-  if (ardb.pressed(UP_BUTTON) && menu_state > 1)
-  {
-    menu_state --;
-  }
-
-  if (ardb.pressed(DOWN_BUTTON) && menu_state < 3)
-  {
-    menu_state ++;
-  }
-
   if (ardb.justPressed(UP_BUTTON) && menu_state > 1)
   {
     menu_state += -1;
@@ -154,7 +143,7 @@ void draw_game()
   //this should be a really simple fire & fire loop
   //
 
-  if (player_turn == 1)
+  /*if (player_turn == 1)
   { // first player turn
     //aiming up and down
     if (ardb.justPressed(UP_BUTTON))
@@ -210,85 +199,41 @@ void draw_game()
 
   //we should draw both players and their shots down here.
   //. . . . somehow
-
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////Game states end
-
-/////////////////////////////////////////////////////////////////////////////////////////////////Master loops
-void setup() {
-  // put your setup code here, to run once:
-  ardb.begin();
-  ardb.setFrameRate(30);
-
-
-  /*int angleA = 0;
-    int angleB = 0;
-    int powerA = 0;
-    int powerB = 0;
-    int wind = 0;
-  */
-  //initiates random number for wind
-  arduboy.initRandomSeed();
-  //serial monitor
-  Serial.begin(9600);
-}
-
-void loop()
-{
-  // put your main code here, to run repeatedly:
-  ardb.clear();
-  ardb.pollButtons();//for justPressed and justReleased
-  if (game_state == 0) //menu
-  {
-    draw_menu();
-  }
-  //if(game_state == 1)//menu
-  //  {draw_game();}
-  //if(game_state == 2)//help
-  //  {draw_help();}
-  if (game_state == 3) //credit
-  {
-    draw_credit();
-  }
-
-
-  // draw screen
-  ardb.display();
-
-  //check buttons
-  arduboy.pollButtons();
-
+*/
+  //ardb.pollButtons();
   //set angle
-  if (arduboy.justPressed(DOWN_BUTTON))
+  if (ardb.justPressed(DOWN_BUTTON))
   {
     angleA = angleA - 1;
   }
-  if (arduboy.justPressed(UP_BUTTON))
+  if (ardb.justPressed(UP_BUTTON))
   {
     angleA = angleA + 1;
   }
   //set powerA
-  if (arduboy.justPressed(LEFT_BUTTON))
+  if (ardb.justPressed(LEFT_BUTTON))
   {
     powerA = powerA - 1;
   }
-  if (arduboy.justPressed(RIGHT_BUTTON))
+  if (ardb.justPressed(RIGHT_BUTTON))
   {
     powerA = powerA + 1;
   }
   //set random wind
-  wind = random(0 - 26);
+  if (ardb.justPressed(A_BUTTON))
+  {
+    wind = random(0 - 26);
+  }
+  //wind = random(0 - 26);
 
   // print results of angle, power and wind
-  arduboy.setCursor(0, 0);
-  arduboy.print("Angle");
-  arduboy.print(angleA);
-  arduboy.print("power");
-  arduboy.print(powerA);
-  arduboy.print("wind");
-  arduboy.print(wind);
-  arduboy.display();
-
+  ardb.setCursor(0, 0);
+  ardb.print("Angle");
+  ardb.print(angleA);
+  ardb.print("power");
+  ardb.print(powerA);
+  ardb.print("wind");
+  ardb.print(wind);
 
   Serial.print("Angle");
   Serial.print(angleA);
@@ -297,8 +242,6 @@ void loop()
   Serial.print("wind");
   Serial.print(wind);
 
-  //pause for speed
-  delay (1000);
 
   //location math
   locationX = (powerA);
@@ -320,21 +263,61 @@ void loop()
     powersY = powersY - 1;
     }
   */
-    //clear screen
-    //arduboy.clear();
-
     //draw background
     for (int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8)
     {
     for (int backgroundy = 0; backgroundy < 64; backgroundy = backgroundy + 8)
     {
-      Sprites::drawOverwrite(backgroundx, backgroundy, background, 0);
+      //Sprites::drawOverwrite(backgroundx, backgroundy, background, 0);
     }
     }
 
     //draw player
     Sprites::drawOverwrite(locationX, locationY, player, 0);
-    arduboy.display();
+    
+  
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////Game states end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////Master loops
+void setup() {
+  // put your setup code here, to run once:
+  ardb.begin();
+  ardb.setFrameRate(30);
+
+
+  /*int angleA = 0;
+    int angleB = 0;
+    int powerA = 0;
+    int powerB = 0;
+    int wind = 0;
+  */
+  //initiates random number for wind
+  ardb.initRandomSeed();
+  //serial monitor
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  // put your main code here, to run repeatedly:
+  ardb.clear();
+  ardb.pollButtons();//for justPressed and justReleased
+  if (game_state == 0) //menu
+  {
+    draw_menu();
+  }
+  if(game_state == 1)//menu
+    {draw_game();}
+  //if(game_state == 2)//help
+  //  {draw_help();}
+  if (game_state == 3) //credit
+  {draw_credit();}
+
+
+  // draw screen
+  ardb.display();
+
   
 }
 ////////////////////////////////////////////////////////////////////////////////////////////Master loops end
