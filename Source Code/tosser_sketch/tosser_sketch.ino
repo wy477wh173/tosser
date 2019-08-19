@@ -320,8 +320,8 @@ void loop()
     powersY = powersY - 1;
     }
   */
-  /*clear screen
-    arduboy.clear();
+    //clear screen
+    //arduboy.clear();
 
     //draw background
     for (int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8)
@@ -335,6 +335,6 @@ void loop()
     //draw player
     Sprites::drawOverwrite(locationX, locationY, player, 0);
     arduboy.display();
-  */
+  
 }
 ////////////////////////////////////////////////////////////////////////////////////////////Master loops end
