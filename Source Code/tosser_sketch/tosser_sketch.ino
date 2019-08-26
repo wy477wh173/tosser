@@ -64,10 +64,10 @@ byte p2_fired = 0;
 byte p2_life = 3;
 short p2_ammo = 24;
 */
-byte angleA = 0;
-byte angleB = 0;
-byte powerA = 0;
-byte powerB = 0;
+short angleA = 0;
+short angleB = 0;
+short powerA = 0;
+short powerB = 0;
 byte wind = 0;
 byte locationX;
 byte locationY;
@@ -144,11 +144,11 @@ void draw_game()
   //set angle
   if (ardb.justPressed(DOWN_BUTTON))
   {
-    angleA = angleA - 1;
+    angleA = angleA + 1;
   }
   if (ardb.justPressed(UP_BUTTON))
   {
-    angleA = angleA + 1;
+    angleA = angleA - 1;
   }
   //set powerA
   if (ardb.justPressed(LEFT_BUTTON))
@@ -184,8 +184,8 @@ void draw_game()
 
 
   //location math
-  locationX = (powerA);
-  locationY = (angleA);
+  locationX = 12; // (powerA);
+  locationY = HEIGHT - 16; //(angleA);
 
   //location math for ark
   /*
@@ -203,6 +203,10 @@ void draw_game()
     powersY = powersY - 1;
     }
   */
+
+  //line math
+  short lineEndX = locationX + powerA;
+  short lineEndY = locationY + angleA;
     //draw background
     for (int backgroundx = 0; backgroundx < 128; backgroundx = backgroundx + 8)
     {
@@ -212,6 +216,8 @@ void draw_game()
     }
     }
 
+    //draw aim angle line
+    ardb.drawLine(locationX,locationY,lineEndX,lineEndY);
     //draw player
     Sprites::drawOverwrite(locationX, locationY, player, 0);
     
